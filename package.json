@@ -6,10 +6,13 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4" ,
+    "rain-sdk": "git+https://github.com/beehive-innovation/rain-sdk.git#27fbcebe10a5e57f7baff605f86aa33ef3fe8662"
+
   },
   "scripts": {
     "start": "react-scripts start",
