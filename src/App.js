@@ -2,76 +2,45 @@ import logo from './logo.svg';
 import './App.css';
 import { ethers } from 'ethers'; 
 import { useEffect , useState} from 'react';  
- import { OrderBook  } from 'rain-sdk'; 
- import { utils  } from 'rain-sdk'; 
-
-
+import { OrderBook  } from 'rain-sdk'; 
+import { utils  } from 'rain-sdk';  
+import abi from "./abi.json"
+import tokenABI from "./tokenABI.json"
 
 
 
 
 function App() {  
 
-  const [provider , setProvider] = useState() 
-   const [orderBook , setOrderBook] = useState()  
-  const [tokenA , setTokenA] = useState()  
-  const [tokenB , setTokenB] = useState()  
-
-
-
 
   useEffect(() => {   
-
-   
-
-
-     _init()
+     
     
   } , [])  
 
-  
+  const addOrder = async () => { 
 
-  async function _init(){  
-
-    let providerObj = new ethers.providers.Web3Provider(window.ethereum)  
-    setProvider(providerObj)  
-    
-    let signer = await providerObj.getSigner()
-
-    let orderBookCtract = new OrderBook('0xb8BADe9783a815512A67B86e5fE967e9B861E102', signer)  
-    
-    setOrderBook(orderBookCtract)
-
-    let tokenA = '0x05ce0b29d94cb8b156638d06336228b935212652'  
-    let tokenAABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint8","name":"version","type":"uint8"}],"name":"Initialized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"DECIMALS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"TOTAL_SUPPLY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account_","type":"address"}],"name":"addFreezable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"freezables","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]
-   
-    let tokenAContract = new ethers.Contract(tokenA ,tokenAABI , signer ) 
-    setTokenA(tokenAContract) 
-
-
-    let tokenB = '0x3b55b7b2eec07cf5f0634b130efbb1a1e4eded0a'  
-    let tokenBABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint8","name":"version","type":"uint8"}],"name":"Initialized","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"DECIMALS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"TOTAL_SUPPLY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account_","type":"address"}],"name":"addFreezable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"freezables","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]
-    let tokenBContract = new ethers.Contract(tokenB ,tokenBABI , signer ) 
-    setTokenB(tokenBContract) 
-  }
-
-
-  const addOrder = async () => {
     console.log("addOrder")    
 
     let max_uint256 = ethers.BigNumber.from(
       "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     );  
-    let eighteenZeros = "000000000000000000";
+    let eighteenZeros = "000000000000000000"; 
+    const max_uint32 = ethers.BigNumber.from("0xffffffff");
     let askPrice = ethers.BigNumber.from("90" + eighteenZeros);
     let aliceInputVault = ethers.BigNumber.from(1);
-    let aliceOutputVault = ethers.BigNumber.from(2);
+    let aliceOutputVault = ethers.BigNumber.from(2); 
+
+    let provider = new ethers.providers.Web3Provider(window.ethereum)
+
+    await provider.send("eth_requestAccounts", []);
 
     let signer = await provider.getSigner()   
-    console.log("signer : " , signer );
+    console.log("signer : " ,await  signer.getAddress() );     
 
-    let orderBookCtract = await OrderBook.get(signer); 
+    //let orderBookCtract = new OrderBook('0xb1AF299454849E40CE04E3521c8076010e1b7B63', signer)  
 
+     let orderBookCtract = new ethers.Contract('0x75b4A6c9238A5206adBa189221B90ebbFe4ac248',abi , signer )
    
     console.log("orderBookCtract : " , orderBookCtract );
     
@@ -80,25 +49,25 @@ function App() {
     const vAskOutputMax = utils.op(OrderBook.Opcodes.CONSTANT, 0); 
     const vAskPrice = utils.op(OrderBook.Opcodes.CONSTANT, 1);  
 
-    
-    // prettier-ignore
-    const askSource = utils.concat([
-      vAskOutputMax,
-      vAskPrice,
-    ]);
+  
+     let askSource = new Uint8Array([0,6,0,1,0,6,0,3]) 
 
-    let askOrderConfig  = {
-      inputToken: '0x05ce0b29d94cb8b156638d06336228b935212652',
-      inputVaultId: aliceInputVault,
-      outputToken: '0x3b55b7b2eec07cf5f0634b130efbb1a1e4eded0a',
-      outputVaultId: aliceOutputVault,
-      tracking: "0x00",
-      vmStateConfig: {
-        sources: [askSource],
-        constants: askConstants,
-      },
-    };
-    console.log("askOrderConfig ")
+     
+      let askOrderConfig = { 
+        interpreter: '0x19dd1aF639604544276353d14439eFC0AD3285E4',
+        expressionDeployer: '0x84E24EA1c545927D1515CBbB2E567Efe5248c322',
+        validInputs: [{ token: '0x3b55b7b2Eec07cf5F0634B130eFbb1A1e4eDEd0a', vaultId: aliceInputVault }],
+        validOutputs: [{ token: '0x05cE0B29D94Cb8b156638D06336228b935212652', vaultId: aliceOutputVault }],
+        interpreterStateConfig: {
+          sources: [askSource],
+          constants: askConstants,  
+        }, 
+        expiresAfter: max_uint32,
+      }
+    
+
+  
+    console.log("askOrderConfig")
     let  txAskOrderLive = await orderBookCtract.addOrder(askOrderConfig); 
     console.log("txAskOrderLive ")
     
@@ -108,37 +77,95 @@ function App() {
 
   }  
 
-  const deposit = async () => {  
+  
+
+  const deposit = async () => {   
 
     let max_uint256 = ethers.BigNumber.from(
       "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     );  
-    let eighteenZeros = "000000000000000000";
-
+    let eighteenZeros = "000000000000000000"; 
+    const max_uint32 = ethers.BigNumber.from("0xffffffff");
     let askPrice = ethers.BigNumber.from("90" + eighteenZeros);
-
-    let tokenA = '0x05ce0b29d94cb8b156638d06336228b935212652'  
-    
-    let tokenB = '0x3b55b7b2eec07cf5f0634b130efbb1a1e4eded0a' 
-
     let aliceInputVault = ethers.BigNumber.from(1);
     let aliceOutputVault = ethers.BigNumber.from(2); 
 
-    let amountB = ethers.BigNumber.from("1000" + eighteenZeros); 
+    let provider = new ethers.providers.Web3Provider(window.ethereum)
 
+    await provider.send("eth_requestAccounts", []);
+
+    let signer = await provider.getSigner()   
+    console.log("signer : " ,await  signer.getAddress() );     
+
+    //let orderBookCtract = new OrderBook('0xb1AF299454849E40CE04E3521c8076010e1b7B63', signer)  
+
+     let orderBookCtract = new ethers.Contract('0x75b4A6c9238A5206adBa189221B90ebbFe4ac248',abi , signer )   
+     let tokenB = new ethers.Contract('0x05cE0B29D94Cb8b156638D06336228b935212652',tokenABI , signer )   
+
+
+    console.log("orderBookCtract : " , orderBookCtract );
+
+
+
+
+    const amountB = ethers.BigNumber.from("1000" + eighteenZeros);
     const depositConfigStructAlice = {
-      token: tokenB,
+      token: '0x05cE0B29D94Cb8b156638D06336228b935212652' ,
       vaultId: aliceOutputVault,
       amount: amountB,
-    }; 
-    
-    // Deposit After approve .
-    const txDepositOrderAlice = await orderBook.deposit(depositConfigStructAlice);
+    };  
 
+    let approveTx = await tokenB.approve('0x75b4A6c9238A5206adBa189221B90ebbFe4ac248', depositConfigStructAlice.amount);  
+    await approveTx.wait()
+    const txDepositOrderAlice = await orderBookCtract.deposit(depositConfigStructAlice); 
+    await txDepositOrderAlice.wait()
+
+
+    
 
   } 
 
-  const takeOrder = async () => { 
+  const BobTakesOrder = async () => {   
+
+    let max_uint256 = ethers.BigNumber.from(
+      "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    );  
+    let eighteenZeros = "000000000000000000"; 
+    const max_uint32 = ethers.BigNumber.from("0xffffffff");
+    let askPrice = ethers.BigNumber.from("90" + eighteenZeros);
+    let aliceInputVault = ethers.BigNumber.from(1);
+    let aliceOutputVault = ethers.BigNumber.from(2); 
+
+    let provider = new ethers.providers.Web3Provider(window.ethereum)
+
+    await provider.send("eth_requestAccounts", []);
+
+    let signer = await provider.getSigner()   
+    console.log("signer : " ,await  signer.getAddress() );     
+
+    //let orderBookCtract = new OrderBook('0xb1AF299454849E40CE04E3521c8076010e1b7B63', signer)  
+
+     let orderBookCtract = new ethers.Contract('0x75b4A6c9238A5206adBa189221B90ebbFe4ac248',abi , signer )   
+     let tokenB = new ethers.Contract('0x05cE0B29D94Cb8b156638D06336228b935212652',tokenABI , signer )   
+
+
+    console.log("orderBookCtract : " , orderBookCtract );
+
+
+
+
+    const amountB = ethers.BigNumber.from("1000" + eighteenZeros);
+    const depositConfigStructAlice = {
+      token: '0x05cE0B29D94Cb8b156638D06336228b935212652' ,
+      vaultId: aliceOutputVault,
+      amount: amountB,
+    };  
+
+    let approveTx = await tokenB.approve('0x75b4A6c9238A5206adBa189221B90ebbFe4ac248', depositConfigStructAlice.amount);  
+    await approveTx.wait()
+    const txDepositOrderAlice = await orderBookCtract.deposit(depositConfigStructAlice); 
+    await txDepositOrderAlice.wait()
+
 
     
 
@@ -148,9 +175,25 @@ function App() {
       
 
       <button onClick={addOrder}>Add Order</button> 
-      <button onClick={deposit} >Deposit</button>
+      <button onClick={deposit} >Deposit Amount B</button>
     </div>
   );
 }
 
-export default App;
+export default App; 
+
+
+// let askOrderConfig = {
+    //   validInputs: [{
+    //     token: '0x3b55b7b2Eec07cf5F0634B130eFbb1A1e4eDEd0a' ,
+    //     vaultId: ethers.BigNumber.from(1) ,
+    //   }],
+    //   validOutputs: [{
+    //     token : '0x05cE0B29D94Cb8b156638D06336228b935212652'  ,
+    //     vaultId: ethers.BigNumber.from(2) ,
+    //   }],
+    //   vmStateConfig: {
+    //     sources: [askSource],
+    //     constants: askConstants,
+    //   }
+    // } 
