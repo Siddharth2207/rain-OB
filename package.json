@@ -11,7 +11,9 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4" ,
-    "rain-sdk": "git+https://github.com/beehive-innovation/rain-sdk.git#3c4336b12ddd0c3e404f513a604c215113079ccb"
+    "rain-sdk": "git+https://github.com/beehive-innovation/rain-sdk.git#3c4336b12ddd0c3e404f513a604c215113079ccb" ,
+    "typescript": ">=4.5.0"
+
 
   },
   "scripts": {
